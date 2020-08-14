@@ -5,6 +5,8 @@ const CopyPlugin = require('copy-webpack-plugin');
 const ExtensionReloader = require('webpack-extension-reloader');
 const { VueLoaderPlugin } = require('vue-loader');
 const { version } = require('./package.json');
+// const VuetifyLoaderPlugin = require('vuetify-loader/lib/plugin');
+const { VuetifyLoaderPlugin } = require('vuetify-loader')
 
 const config = {
   mode: process.env.NODE_ENV,
@@ -30,20 +32,12 @@ const config = {
       },
       {
         test: /\.js$/,
-        loader: 'babel-loader',
-        exclude: /node_modules/,
+        enforce: 'pre',
+        use: ['source-map-loader'],
       },
       {
         test: /\.css$/,
         use: [MiniCssExtractPlugin.loader, 'css-loader'],
-      },
-      {
-        test: /\.scss$/,
-        use: [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader'],
-      },
-      {
-        test: /\.sass$/,
-        use: [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader?indentedSyntax'],
       },
       {
         test: /\.(png|jpg|jpeg|gif|svg|ico)$/,
@@ -65,6 +59,30 @@ const config = {
           esModule: false,
         },
       },
+      {
+        test: /\.s(c|a)ss$/,
+        use: [
+          'vue-style-loader',
+          'css-loader',
+          {
+            loader: 'sass-loader',
+            // Requires sass-loader@^7.0.0
+            options: {
+              implementation: require('sass'),
+              fiber: require('fibers'),
+              indentedSyntax: true // optional
+            },
+            // Requires sass-loader@^8.0.0
+            options: {
+              implementation: require('sass'),
+              sassOptions: {
+                fiber: require('fibers'),
+                indentedSyntax: true // optional
+              },
+            },
+          },
+        ],
+      },
     ],
   },
   plugins: [
@@ -75,11 +93,19 @@ const config = {
     new MiniCssExtractPlugin({
       filename: '[name].css',
     }),
+    new VuetifyLoaderPlugin({
+      match (originalTag, { kebabTag, camelTag, path, component }) {
+        if (kebabTag.startsWith('core-')) {
+          return [camelTag, `import ${camelTag} from '@/components/core/${camelTag.substring(4)}.vue'`]
+        }
+      }
+    }),
     new CopyPlugin([
       { from: 'icons', to: 'icons', ignore: ['icon.xcf'] },
       { from: 'popup/popup.html', to: 'popup/popup.html', transform: transformHtml },
       { from: 'options/options.html', to: 'options/options.html', transform: transformHtml },
       { from: 'new_tab/new_tab.html', to: 'new_tab/new_tab.html', transform: transformHtml },
+      { from: 'fonts', to: 'fonts'},
       {
         from: 'manifest.json',
         to: 'manifest.json',
