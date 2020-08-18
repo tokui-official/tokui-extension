@@ -5,9 +5,9 @@
         <v-card class="mx-auto" max-width="444" elevation="24" shaped>
           <!-- <v-img src="https://cdn.vuetifyjs.com/images/cards/sunshine.jpg" height="200px"></v-img> -->
 
-          <v-card-title class="pt-10 pb-10">Top western road trips</v-card-title>
+          <v-card-title class="pt-10 pb-10">配電所</v-card-title>
 
-          <v-card-subtitle>1,000 miles of wonder</v-card-subtitle>
+          <v-card-subtitle>はいでんしょ</v-card-subtitle>
           <v-divider class="mx-4"></v-divider>
           <!-- <v-card-title>Thông tin</v-card-title> -->
           <v-card-text>
@@ -34,7 +34,7 @@
             <div v-show="card.show">
               <v-divider></v-divider>
 
-              <v-card-text>I'm a thing. But, like most politicians, he promised more than he could deliver. You won't have time for sleeping, soldier, not with all the bed making you'll be doing. Then we'll go with that data file! Hey, you add a one and two zeros to that or we walk! You're going to do his laundry? I've got to find a way to escape.</v-card-text>
+              <v-card-text>trạm phân phối điện</v-card-text>
             </div>
           </v-expand-transition>
         </v-card>
