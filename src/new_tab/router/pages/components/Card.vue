@@ -1,16 +1,25 @@
 <template>
-  <v-container fluid class="pt-16">
+  <v-container fluid class="mt-2">
     <v-row align="center" justify="center">
       <v-col cols="4">
         <v-card class="mx-auto" max-width="444" elevation="24" shaped>
           <!-- <v-img src="https://cdn.vuetifyjs.com/images/cards/sunshine.jpg" height="200px"></v-img> -->
 
-          <v-card-title class="pt-16 pb-16">Top western road trips</v-card-title>
+          <v-card-title class="pt-10 pb-10">Top western road trips</v-card-title>
 
           <v-card-subtitle>1,000 miles of wonder</v-card-subtitle>
-
+          <v-divider class="mx-4"></v-divider>
+          <!-- <v-card-title>Thông tin</v-card-title> -->
+          <v-card-text>
+            <!-- <v-chip-group
+              active-class="deep-purple accent-4 white--text"
+              column
+            > -->
+              <v-chip>N1</v-chip>
+            <!-- </v-chip-group> -->
+          </v-card-text>
           <v-card-actions>
-            <v-btn text>Share</v-btn>
+            <v-btn text>Chia sẻ</v-btn>
 
             <v-btn color="purple" text>Bookmark</v-btn>
 

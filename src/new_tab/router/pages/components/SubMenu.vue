@@ -7,14 +7,14 @@
           <v-icon v-else>mdi-menu</v-icon>
         </v-btn>
       </template>
-      <v-btn fab dark small color="green">
-        <v-icon>mdi-pencil</v-icon>
+      <v-btn fab dark small color="green" @click="test()">
+        <v-icon>mdi-wrench</v-icon>
       </v-btn>
       <v-btn fab dark small color="indigo">
-        <v-icon>mdi-plus</v-icon>
+        <v-icon>mdi-bookmark</v-icon>
       </v-btn>
       <v-btn fab dark small color="red">
-        <v-icon>mdi-delete</v-icon>
+        <v-icon>mdi-account</v-icon>
       </v-btn>
     </v-speed-dial>
   </div>
@@ -24,6 +24,11 @@
 export default {
   data: () => ({
     fab: false,
-  })
+  }),
+  methods: {
+    test() {
+      this.$router.push("setting");
+    },
+  },
 };
 </script>

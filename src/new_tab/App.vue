@@ -1,17 +1,19 @@
 <template>
-  <div>
-    <v-app>
-      <router-view></router-view>
-    </v-app>
-  </div>
+  <v-app>
+    <Main />
+  </v-app>
 </template>
 
 <script>
+import Main from "./router/pages/Index";
 export default {
   data() {
-    return {}
-  }
-}
+    return {};
+  },
+  components: {
+    Main
+  },
+};
 </script>
 
 
