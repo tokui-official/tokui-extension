@@ -5,23 +5,26 @@
         <v-card class="mx-auto" max-width="444" elevation="24" shaped>
           <!-- <v-img src="https://cdn.vuetifyjs.com/images/cards/sunshine.jpg" height="200px"></v-img> -->
 
-          <v-card-title class="pt-10 pb-10">配電所</v-card-title>
+          <v-card-title class="pt-10 pb-10 font-weight-bold">配電所</v-card-title>
 
           <v-card-subtitle>はいでんしょ</v-card-subtitle>
           <v-divider class="mx-4"></v-divider>
-          <!-- <v-card-title>Thông tin</v-card-title> -->
-          <v-card-text>
-            <!-- <v-chip-group
-              active-class="deep-purple accent-4 white--text"
-              column
-            > -->
-              <v-chip>N1</v-chip>
-            <!-- </v-chip-group> -->
-          </v-card-text>
-          <v-card-actions>
-            <v-btn text>Chia sẻ</v-btn>
+          <v-expand-transition>
+            <div v-show="card.show">
+              <v-divider></v-divider>
 
-            <v-btn color="purple" text>Bookmark</v-btn>
+              <v-card-text class="font-weight-bold">trạm phân phối điện</v-card-text>
+            </div>
+          </v-expand-transition>
+          <!-- <v-card-title>Thông tin</v-card-title> -->
+
+          <v-card-actions>
+            <v-btn icon color="blue-grey lighten-1">
+              <v-icon>mdi-bookmark</v-icon>
+            </v-btn>
+            <v-btn icon color="green">
+              <v-icon>mdi-share-variant</v-icon>
+            </v-btn>
 
             <v-spacer></v-spacer>
 
@@ -29,15 +32,11 @@
               <v-icon>{{ card.show ? 'mdi-chevron-up' : 'mdi-chevron-down' }}</v-icon>
             </v-btn>
           </v-card-actions>
-
-          <v-expand-transition>
-            <div v-show="card.show">
-              <v-divider></v-divider>
-
-              <v-card-text>trạm phân phối điện</v-card-text>
-            </div>
-          </v-expand-transition>
         </v-card>
+        <div class="mt-8">
+          <v-chip class="ma-2" color="primary" label outlined>N1</v-chip>
+          <v-chip class="ma-2" color="primary" label outlined>Từ vựng</v-chip>
+        </div>
       </v-col>
     </v-row>
   </v-container>
