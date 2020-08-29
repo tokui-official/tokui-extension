@@ -15,5 +15,8 @@ export default {
   }
 };
 </script>
+<style>
+ @import '../assets/style/flash_card.css';
+</style>
 
 

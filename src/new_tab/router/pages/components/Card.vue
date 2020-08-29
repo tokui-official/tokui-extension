@@ -2,16 +2,9 @@
   <v-container fluid class="mt-2">
     <v-row align="center" justify="center">
       <v-col cols="5">
-        <WordCard v-if="type ==0" :card="card" :data="random_data" />
-        <GrammarCard v-if="type ==1" :card="card" :data="random_data" />
-        <KanjiCard v-if="type ==2" :card="card" :data="random_data" />
-
-        <div class="mt-8">
-          <v-chip class="ma-2" color="primary" label outlined>N{{random_data.level}}</v-chip>
-          <v-chip class="ma-2" color="primary" label outlined v-if="type == 0">Từ vựng</v-chip>
-          <v-chip class="ma-2" color="primary" label outlined v-if="type == 1">Ngữ pháp</v-chip>
-          <v-chip class="ma-2" color="primary" label outlined v-if="type == 2">Kanji</v-chip>
-        </div>
+        <WordCard v-if="type ==0" :card="card" :data="random_data" :tag_color="randomColor" />
+        <GrammarCard v-if="type ==1" :card="card" :data="random_data" :tag_color="randomColor" />
+        <KanjiCard v-if="type ==2" :card="card" :data="random_data" :tag_color="randomColor" />
       </v-col>
     </v-row>
   </v-container>
@@ -25,10 +18,14 @@ import WordCard from "./Card/Word";
 export default {
   data: () => ({
     card: {
-      show: false,
+      show: true,
     },
     random_data: {},
     type: 0,
+    colorList: [
+      'red', 'pink', 'purple', 'deep-purple', 'indigo', 'blue', 'light-blue', 'cyan', 'teal', 'green', 'light-green', 'lime', 'amber', 'orange'
+    ],
+    randomColor: 'red'
   }),
   components: {
     WordCard,
@@ -88,6 +85,8 @@ export default {
         this.random_data = this.getRandomData(local_random_list);
       }
     }
+    let randomValue = Math.floor(Math.random() * this.colorList.length);
+    this.randomColor = this.colorList[randomValue];
   },
   methods: {
     countRandomList() {

@@ -1,5 +1,6 @@
 <template>
   <div id="create">
+    <ThemeToggleButton />
     <v-speed-dial v-model="fab" bottom right class="mb-5">
       <template v-slot:activator>
         <v-btn v-model="fab" color="blue darken-2" dark fab>
@@ -21,14 +22,18 @@
 </template>
 
 <script>
+import ThemeToggleButton from "./ThemeToggleButton";
 export default {
+  components: {
+    ThemeToggleButton
+  },
   data: () => ({
     fab: false,
   }),
   methods: {
     test() {
       this.$router.push("setting");
-    },
+    }
   },
 };
 </script>

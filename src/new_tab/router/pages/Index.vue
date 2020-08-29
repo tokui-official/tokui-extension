@@ -1,6 +1,5 @@
 <template>
   <v-app id="sandbox">
-    <Navigation />
     <router-view></router-view>
     <Footer />
   </v-app>
