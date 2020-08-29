@@ -57,30 +57,6 @@
       </v-btn>
     </v-card-actions>
   </v-card>
-  <!-- <div class="card" v-on:click="flipCard" :class="{'lift-card' : isFlipping, 'dark-card': $vuetify.theme.dark}">
-  <div class="front face" :class="{ 'flipped' : flipped}">
-    <div class="word">配電所</div>
-  </div>
-  <div class="back face" :class="{ 'back-flipped' : flipped}">
-    <div class="kana">はいでんしょ</div>
-    <div class="line"></div>
-    <div class="meaning">Trạm phân phối điện</div>
-    <div class="button-list">
-        <div class="anim-icon anim-icon-md bookmark">
-          <input type="checkbox" id="bookmark" />
-          <label for="bookmark"></label>
-        </div>
-        <div class="share">
-          <span>Share</span>
-          <nav>
-            <a href="#"><i class="fa fa-twitter"></i></a>
-            <a href="#"><i class="fa fa-facebook"></i></a>
-            <a href="#"><i class="fa fa-google"></i></a>
-            <a href="#"><i class="fa fa-github"></i></a>
-          </nav>
-        </div>
-    </div>
-  </div> -->
 </div>
 </template>
 
