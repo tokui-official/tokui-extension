@@ -44,9 +44,10 @@ $color-dusk: #ffeb3b;
   border:0;
   cursor:pointer;
   outline:none;
-  position: absolute;
+  position: fixed;
   right: 80px;
-  bottom: 10px;
+  bottom: 40px;
+  border-radius: 50% !important;
 
   &.dawn{
     background:$color-light;
