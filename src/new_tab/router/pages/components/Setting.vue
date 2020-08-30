@@ -93,6 +93,7 @@ export default {
       this.word_level = (option.word_level.split(","))
       this.grammar_level = (option.grammar_level.split(","))
       this.kanji_level = (option.kanji_level.split(","))
+      this.detail_show = option.card_show
     } 
   },
   methods: {
