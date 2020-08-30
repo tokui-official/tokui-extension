@@ -2,9 +2,9 @@
   <v-container fluid class="mt-2">
     <v-row align="center" justify="center">
       <v-col cols="5">
-        <WordCard v-if="type ==0" :card="card" :data="random_data" :tag_color="randomColor" />
-        <GrammarCard v-if="type ==1" :card="card" :data="random_data" :tag_color="randomColor" />
-        <KanjiCard v-if="type ==2" :card="card" :data="random_data" :tag_color="randomColor" />
+        <WordCard v-if="type ==0" :card_show="user_option.card_show" :data="random_data" :tag_color="randomColor" />
+        <GrammarCard v-if="type ==1" :card_show="user_option.card_show" :data="random_data" :tag_color="randomColor" />
+        <KanjiCard v-if="type ==2" :card_show="user_option.card_show" :data="random_data" :tag_color="randomColor" />
       </v-col>
     </v-row>
   </v-container>
@@ -17,15 +17,26 @@ import WordCard from "./Card/Word";
 
 export default {
   data: () => ({
-    card: {
-      show: true,
-    },
+    user_option: {},
     random_data: {},
     type: 0,
     colorList: [
-      'red', 'pink', 'purple', 'deep-purple', 'indigo', 'blue', 'light-blue', 'cyan', 'teal', 'green', 'light-green', 'lime', 'amber', 'orange'
+      "red",
+      "pink",
+      "purple",
+      "deep-purple",
+      "indigo",
+      "blue",
+      "light-blue",
+      "cyan",
+      "teal",
+      "green",
+      "light-green",
+      "lime",
+      "amber",
+      "orange",
     ],
-    randomColor: 'red'
+    randomColor: "red",
   }),
   components: {
     WordCard,
@@ -33,21 +44,22 @@ export default {
     KanjiCard,
   },
   async created() {
-    let user_option = {};
     //GET user option and set user option
-    if (!localStorage.getItem("user_option")) {
-      user_option = {
+    let option = localStorage.getItem("user_option");
+    if (!option) {
+      this.user_option = {
         kanji_level: "3,4",
         kanji_quantity: "100",
         grammar_level: "3,4",
         grammar_quantity: "200",
         word_level: "3,4",
         word_quantity: "700",
+        card_show: true
       };
-      localStorage.setItem("user_option", JSON.stringify(user_option));
-      this.$store.dispatch("setUserOption", user_option);
+      localStorage.setItem("user_option", JSON.stringify(this.user_option));
+      // this.$store.dispatch("setUserOption", this.user_option);
     } else {
-      user_option = JSON.parse(localStorage.getItem("user_option"));
+      this.user_option = JSON.parse(option);
     }
     //check exist data random list
     let local_random_list = localStorage.getItem("random_list");
@@ -55,11 +67,11 @@ export default {
       //get list random
       await this.$axios
         .get("/get_random_list", {
-          params: user_option,
+          params: this.user_option,
         })
         .then((response) => {
           //push data to vuex and local storage
-          this.$store.dispatch("setRandomList", response.data);
+          // this.$store.dispatch("setRandomList", response.data);
           //push to local storage
           const random_list = JSON.stringify(response.data);
 
@@ -68,20 +80,21 @@ export default {
         });
     } else {
       if (this.countRandomList()) {
-        user_option = this.$store.getters.user_option;
+        // user_option = this.$store.getters.user_option;
         await this.$axios
           .get("/get_random_list", {
-            params: user_option,
+            params: this.user_option,
           })
           .then((response) => {
             console.log(response);
-            this.$store.dispatch("setRandomList", response.data);
+            // this.$store.dispatch("setRandomList", response.data);
             //push to local storage
             const random_list = JSON.stringify(response.data);
             localStorage.setItem("random_list", random_list);
             this.random_data = this.getRandomData(random_list);
           });
       } else {
+        // this.$store.dispatch("setRandomList", JSON.parse(local_random_list));
         this.random_data = this.getRandomData(local_random_list);
       }
     }

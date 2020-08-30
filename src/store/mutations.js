@@ -5,6 +5,6 @@ export default {
     state.random_list = payload
   },
   [types.UPDATE_USER_OPTION] (state, payload) {
-    state.user.option = payload
+    state.user.options = payload
   }
 }

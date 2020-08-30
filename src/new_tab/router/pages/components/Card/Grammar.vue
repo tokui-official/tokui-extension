@@ -3,23 +3,29 @@
     <!-- <v-img src="https://cdn.vuetifyjs.com/images/cards/sunshine.jpg" height="200px"></v-img> -->
 
     <div class="tag-list">
-      <v-chip class="ma-1" :color="tag_color"  text-color="white" >        
-        <v-avatar left class="darken-4" :class="tag_color" >{{data.level}}</v-avatar>
+      <v-chip class="ma-1" :color="tag_color" text-color="white">
+        <v-avatar left class="darken-4" :class="tag_color">{{data.level}}</v-avatar>
         N{{data.level}}
       </v-chip>
-      <v-chip class="ma-2" color="blue-grey"  text-color="white">Ngữ pháp</v-chip>
-    </div>    
+      <v-chip class="ma-2" color="blue-grey" text-color="white">Ngữ pháp</v-chip>
+    </div>
 
     <v-card-title class="pt-10 pb-10 font-weight-bold">{{data.struct}}</v-card-title>
 
     <v-card-subtitle>{{data.struct_vi}}</v-card-subtitle>
     <v-divider class="mx-4"></v-divider>
     <v-expand-transition>
-      <div v-show="card.show">
+      <div v-show="show_detail">
         <v-divider></v-divider>
         <div v-for="(item, key) in data.detail" :key="key">
           <v-card-text class="font-weight-bold">
-            <v-alert border="left" dense outlinedv v-if="item.synopsis !== ''" color="#f7f7f7">{{item.synopsis}}</v-alert>
+            <v-alert
+              border="left"
+              dense
+              outlinedv
+              v-if="item.synopsis !== ''"
+              color="#f7f7f7"
+            >{{item.synopsis}}</v-alert>
             <v-alert dense outlined class="grammar-explain">{{item.explain}}</v-alert>
             <ul v-if="item.examples">
               <li v-for="(ex,i) in item.examples" :key="i">
@@ -42,17 +48,25 @@
       <div class="share">
         <span>Share</span>
         <nav>
-          <a href="#"><i class="fa fa-twitter"></i></a>
-          <a href="#"><i class="fa fa-facebook"></i></a>
-          <a href="#"><i class="fa fa-google"></i></a>
-          <a href="#"><i class="fa fa-github"></i></a>
+          <a href="#">
+            <i class="fa fa-twitter"></i>
+          </a>
+          <a href="#">
+            <i class="fa fa-facebook"></i>
+          </a>
+          <a href="#">
+            <i class="fa fa-google"></i>
+          </a>
+          <a href="#">
+            <i class="fa fa-github"></i>
+          </a>
         </nav>
       </div>
 
       <v-spacer></v-spacer>
 
-      <v-btn icon @click="card.show = !card.show ">
-        <v-icon>{{ card.show ? 'mdi-chevron-up' : 'mdi-chevron-down' }}</v-icon>
+      <v-btn icon @click="show_detail = !show_detail ">
+        <v-icon>{{ show_detail ? 'mdi-chevron-up' : 'mdi-chevron-down' }}</v-icon>
       </v-btn>
     </v-card-actions>
   </v-card>
@@ -62,15 +76,21 @@
 <script>
 export default {
   props: {
-    card: {
-      type: Object,
+    card_show: {
+      type: Boolean,
+      required: true,
     },
     data: {
       type: Object,
     },
     tag_color: {
-      type: Object,
-    }
+      type: String,
+    },
+  },
+  data: function () {
+    return {
+      show_detail: this.card_show,
+    };
   },
 };
 </script>
