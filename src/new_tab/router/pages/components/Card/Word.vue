@@ -1,9 +1,15 @@
 <template>
-  <v-card class="mx-auto" max-width="600" elevation="24" shaped>
+<div>
+  <v-card class="mx-auto card" max-width="600" elevation="24" shaped>
     <!-- <v-img src="https://cdn.vuetifyjs.com/images/cards/sunshine.jpg" height="200px"></v-img> -->
-
-    <v-card-title class="pt-10 pb-10 font-weight-bold">{{data.word}}</v-card-title>
-
+    <div class="tag-list">
+      <v-chip class="ma-1" :color="tag_color"  text-color="white" >        
+        <v-avatar left class="darken-4" :class="tag_color" >{{data.level}}</v-avatar>
+        N{{data.level}}
+      </v-chip>
+      <v-chip class="ma-2" color="deep-orange"  text-color="white">Từ vựng</v-chip>     
+    </div>
+    <v-card-title class="pt-10 pb-5 font-weight-bold definition">{{data.word}}</v-card-title>
     <v-card-subtitle>{{data.phonetic}}</v-card-subtitle>
     <v-divider class="mx-4"></v-divider>
     <v-expand-transition>
@@ -11,16 +17,16 @@
         <v-divider></v-divider>
 
         <div v-for="(item, key) in data.word_mean" :key="key">
-          <v-card-text class="font-weight-bold">
+          <v-card-text class="font-weight-bold mean-card">
             <v-alert border="left" color="#f7f7f7" dense>
               {{item.mean}}
               <!-- <v-chip class="ma-2" color="primary" outlined dense>N</v-chip> -->
             </v-alert>
             <ul v-if="item.examples">
               <li v-for="(ex, i) in item.examples" :key="i">
-                <p>{{ex.content}}</p>
-                <p>{{ex.trans}}</p>
-                <p>{{ex.mean}}</p>
+                <p class="example">{{ex.content}}</p>
+                <!-- <p>{{ex.trans}}</p> -->
+                <p class="example_mean">{{ex.mean}}</p>
               </li>
             </ul>
           </v-card-text>
@@ -30,12 +36,19 @@
     <!-- <v-card-title>Thông tin</v-card-title> -->
 
     <v-card-actions>
-      <v-btn icon color="blue-grey lighten-1">
-        <v-icon>mdi-bookmark</v-icon>
-      </v-btn>
-      <v-btn icon color="green">
-        <v-icon>mdi-share-variant</v-icon>
-      </v-btn>
+      <div class="anim-icon anim-icon-md bookmark">
+        <input type="checkbox" id="bookmark" />
+        <label for="bookmark"></label>
+      </div>
+      <div class="share">
+        <span>Share</span>
+        <nav>
+          <a href="#"><i class="fa fa-twitter"></i></a>
+          <a href="#"><i class="fa fa-facebook"></i></a>
+          <a href="#"><i class="fa fa-google"></i></a>
+          <a href="#"><i class="fa fa-github"></i></a>
+        </nav>
+      </div>
 
       <v-spacer></v-spacer>
 
@@ -44,6 +57,7 @@
       </v-btn>
     </v-card-actions>
   </v-card>
+</div>
 </template>
 
 
@@ -56,6 +70,9 @@ export default {
     data: {
       type: Object,
     },
+    tag_color: {
+      type: Object,
+    }
   }
 };
 </script>
