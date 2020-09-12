@@ -23,8 +23,8 @@
             <li>
               Onyomi:
               <v-chip
-                v-for="item in data.on"
-                :key="item"
+                v-for="(item, key) in data.on"
+                :key="key"
                 class="ma-1"
                 color="primary"
                 text-color="white"
@@ -34,8 +34,8 @@
             <li>
               Kunyomi:
               <v-chip
-                v-for="item in data.kun"
-                :key="item"
+                v-for="(item, key) in data.kun"
+                :key="key"
                 class="ma-1"
                 color="green"
                 text-color="white"
@@ -50,10 +50,10 @@
 
     <v-card-actions>
       <div class="anim-icon anim-icon-md bookmark">
-        <input type="checkbox" id="bookmark" />
+        <input type="checkbox" id="bookmark" v-model="bookmark_flg" @change="Bookmark()" />
         <label for="bookmark"></label>
       </div>
-      <div class="share">
+      <!-- <div class="share">
         <span>Share</span>
         <nav>
           <a href="#">
@@ -69,12 +69,13 @@
             <i class="fa fa-github"></i>
           </a>
         </nav>
-      </div>
+      </div>-->
 
       <v-spacer></v-spacer>
 
       <v-btn icon @click="show_detail = !show_detail ">
-        <v-icon>{{ show_detail ? 'mdi-chevron-up' : 'mdi-chevron-down' }}</v-icon>
+        <v-icon v-if="show_detail" v-text="'$chevron_up'" size="small"></v-icon>
+        <v-icon v-else v-text="'$chevron_down'" size="small"></v-icon>
       </v-btn>
     </v-card-actions>
   </v-card>
@@ -88,6 +89,10 @@ export default {
       type: Boolean,
       required: true,
     },
+    bookmark_flag: {
+      type: Boolean,
+      required: true,
+    },
     data: {
       type: Object,
     },
@@ -98,7 +103,24 @@ export default {
   data: function () {
     return {
       show_detail: this.card_show,
+      bookmark_flg: false
     };
+  },
+  created() {
+    if(this.data.kun && !Array.isArray(this.data.kun)) {
+      this.data.kun = this.data.kun.replaceAll('-', '')
+      this.data.kun = this.data.kun.split(" ")
+    }
+    this.bookmark_flg = this.bookmark_flag
+  },
+  methods: {
+    Bookmark() {
+      if(this.bookmark_flg) {
+        this.$emit('saveBookmark', 2)
+      } else {
+        this.$emit('removeBookmark', this.data)
+      }
+    },
   },
 };
 </script>
