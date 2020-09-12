@@ -18,20 +18,20 @@
 </template>
 <script>
 export default {
-  data: () => ({
-    dark_mode: false
-  }),
   created() {
-    if(localStorage.getItem("dark_mode")) {
-      this.dark_mode = localStorage.getItem("dark_mode")
-      this.$vuetify.theme.dark = this.dark_mode
+    let dark_mode = localStorage.getItem("dark_mode")
+    if(dark_mode) {
+      if(dark_mode  === "true") {
+        this.$vuetify.theme.dark = true
+      } else {
+        this.$vuetify.theme.dark = false
+      }
     }
   },
   methods: {
     changeThemeMode() {
-      this.dark_mode = !this.dark_mode
-      this.$vuetify.theme.dark = this.dark_mode
-      localStorage.setItem("dark_mode", this.dark_mode);
+      this.$vuetify.theme.dark = !this.$vuetify.theme.dark
+      localStorage.setItem("dark_mode", this.$vuetify.theme.dark);
     }
   },
 };

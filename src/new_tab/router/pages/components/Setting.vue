@@ -59,6 +59,11 @@
                   <v-switch v-model="detail_show" class="ma-2" label="Luôn hiển thị nghĩa"></v-switch>
                 </v-col>
               </v-row>
+              <v-row align="center">
+                <v-col cols="12">
+                  <v-switch v-model="bookmark_show" class="ma-2" label="Luôn hiển Bookmark"></v-switch>
+                </v-col>
+              </v-row>
               <v-btn color="success" @click="saveOption()" :loading="loading">Lưu</v-btn>
               <v-btn color="warning" text @click="cancelOption()">Hủy</v-btn>
             </v-form>
@@ -80,34 +85,54 @@ export default {
       { text: "N4", level: "4" },
       { text: "N5", level: "5" },
     ],
-    word_level: ["3", "4"],
-    grammar_level: ["3", "4"],
-    kanji_level: ["3", "4"],
+    word_level: [],
+    grammar_level: [],
+    kanji_level: [],
     detail_show: false,
     loading: false,
+    bookmark_show: false
   }),
   created() {
     let option = localStorage.getItem("user_option");
-    if(option) {
-      option = JSON.parse(option)
-      this.word_level = (option.word_level.split(","))
-      this.grammar_level = (option.grammar_level.split(","))
-      this.kanji_level = (option.kanji_level.split(","))
-      this.detail_show = option.card_show
-    } 
+    if (option) {
+      option = JSON.parse(option);
+      if (option.word_level) {
+        this.word_level = option.word_level.split(",");
+      }
+      if (option.grammar_level) {
+        this.grammar_level = option.grammar_level.split(",");
+      }
+      if (option.kanji_level) {
+        this.kanji_level = option.kanji_level.split(",");
+      }
+      this.detail_show = option.card_show;
+      this.bookmark_show = option.bookmark_show
+    } else {
+      this.word_level = ["3", "4"];
+      this.grammar_level = ["3", "4"];
+      this.kanji_level = ["3", "4"];
+    }
   },
   methods: {
     async saveOption() {
       this.loading = true;
-      let user_option = {
-        kanji_level: this.kanji_level.toString(),
-        kanji_quantity: "100",
-        grammar_level: this.grammar_level.toString(),
-        grammar_quantity: "200",
-        word_level: this.word_level.toString(),
-        word_quantity: "700",
-        card_show: this.detail_show,
-      };
+
+      let user_option = {};
+      if (this.kanji_level.toString()) {
+        user_option.kanji_level = this.kanji_level.toString();
+        user_option.kanji_quantity = 100;
+      }
+      if (this.grammar_level.toString()) {
+        user_option.grammar_level = this.grammar_level.toString();
+        user_option.grammar_quantity = 100;
+      }
+      if (this.word_level.toString()) {
+        user_option.word_level = this.word_level.toString();
+        user_option.word_quantity = 100;
+      }
+      user_option.card_show = this.detail_show;
+      user_option.bookmark_show = this.bookmark_show;
+
       localStorage.setItem("user_option", JSON.stringify(user_option));
       // this.$store.dispatch("setUserOption", user_option);
       //get list random

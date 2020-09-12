@@ -42,10 +42,10 @@
 
     <v-card-actions>
       <div class="anim-icon anim-icon-md bookmark">
-        <input type="checkbox" id="bookmark" />
+        <input type="checkbox" id="bookmark" @click="saveBookmark()" />
         <label for="bookmark"></label>
       </div>
-      <div class="share">
+      <!-- <div class="share">
         <span>Share</span>
         <nav>
           <a href="#">
@@ -61,12 +61,13 @@
             <i class="fa fa-github"></i>
           </a>
         </nav>
-      </div>
+      </div> -->
 
       <v-spacer></v-spacer>
 
       <v-btn icon @click="show_detail = !show_detail ">
-        <v-icon>{{ show_detail ? 'mdi-chevron-up' : 'mdi-chevron-down' }}</v-icon>
+        <v-icon v-if="show_detail" v-text="'$chevron_up'" size="small"></v-icon>
+        <v-icon v-else v-text="'$chevron_down'" size="small"></v-icon>
       </v-btn>
     </v-card-actions>
   </v-card>
@@ -91,6 +92,11 @@ export default {
     return {
       show_detail: this.card_show,
     };
+  },
+  methods: {
+    saveBookmark() {
+      this.$emit('saveBookmark', 1)
+    },
   },
 };
 </script>
