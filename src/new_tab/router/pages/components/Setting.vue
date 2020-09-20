@@ -8,8 +8,8 @@
             <v-form ref="form" lazy-validation>
               <v-row align="center">
                 <v-col cols="12">
+                  <label class="setting-label">Từ vựng</label>
                   <v-select
-                    label="Từ vựng"
                     v-model="word_level"
                     :items="level"
                     item-text="text"
@@ -19,13 +19,14 @@
                     multiple
                     deletable-chips
                     small-chips
+                    solo
                   ></v-select>
                 </v-col>
               </v-row>
               <v-row align="center">
                 <v-col cols="12">
+                  <label class="setting-label">Ngữ pháp</label>
                   <v-select
-                    label="Ngữ pháp"
                     v-model="grammar_level"
                     :items="level"
                     item-text="text"
@@ -35,13 +36,14 @@
                     multiple
                     deletable-chips
                     small-chips
+                    solo
                   ></v-select>
                 </v-col>
               </v-row>
               <v-row align="center">
                 <v-col cols="12">
+                  <label class="setting-label">Kanji</label>
                   <v-select
-                    label="Kanji"
                     v-model="kanji_level"
                     :items="level"
                     item-text="text"
@@ -51,12 +53,13 @@
                     multiple
                     deletable-chips
                     small-chips
+                    solo
                   ></v-select>
                 </v-col>
               </v-row>
               <v-row align="center">
                 <v-col cols="12">
-                  <v-switch v-model="detail_show" class="ma-2" label="Luôn hiển thị nghĩa"></v-switch>
+                  <v-switch v-model="detail_show" class="ma-2" label="Luôn hiển thị nghĩa" color="success" hide-details inset></v-switch>
                 </v-col>
               </v-row>
               <v-row align="center">
@@ -160,15 +163,19 @@ export default {
 <style scoped>
 .setting-container .setting-label {
   padding-left: 0px !important;
+  font-size: 16px !important;
+  font-weight: bold !important;
+  margin-bottom: 5px !important;
 }
-.setting-container .setting-label header {
-  font-size: 16px;
-  font-weight: bold;
-}
+
 .setting-container .setting-title {
   font-size: 18px;
   font-weight: bold;
   color: #e53935 !important;
   padding-left: 0px !important;
+}
+.setting-container .col-12 {
+  padding-top: 6px !important;
+  padding-bottom: 6px !important;
 }
 </style>
