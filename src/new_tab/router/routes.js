@@ -1,6 +1,7 @@
-import PageIndex from './pages/Index'
 import Setting from './pages/components/Setting'
 import Content from './pages/components/Content'
+import Bookmark from './pages/components/Bookmark'
+
 
 
 export default [
@@ -13,5 +14,10 @@ export default [
     path: '/setting',
     component: Setting,
     name: 'setting'
+  },
+  {
+    path: '/bookmark',
+    component: Bookmark,
+    name: 'bookmark'
   }
 ]

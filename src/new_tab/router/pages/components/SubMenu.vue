@@ -19,7 +19,7 @@
             
       <v-tooltip left>
         <template v-slot:activator="{ on, attrs }">
-          <v-btn fab dark small color="indigo" v-bind="attrs" v-on="on">
+          <v-btn fab dark small color="indigo" @click="bookmark()" v-bind="attrs" v-on="on">
             <v-icon v-text="'$bookmark'"></v-icon>
           </v-btn>
         </template>
@@ -50,6 +50,9 @@ export default {
   methods: {
     setting() {
       this.$router.push("setting");
+    },
+    bookmark() {
+      this.$router.push("bookmark")
     }
   },
 };
