@@ -1,22 +1,20 @@
 <template>
   <v-app id="sandbox">
     <router-view></router-view>
+    <SubMenu />
     <Footer />
   </v-app>
 </template>
 
 <script>
-import Navigation from "./components/Navigation";
 import Footer from "./components/Footer";
-import Content from "./components/Content";
-
+import SubMenu from "./components/SubMenu";
 
 export default {
   data: () => ({}),
   components: {
-    Navigation,
     Footer,
-    Content
+    SubMenu
   },
 };
 </script>

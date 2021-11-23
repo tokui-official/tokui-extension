@@ -116,39 +116,45 @@ export default {
   methods: {
     async saveOption() {
       this.loading = true;
-
+      // let jus_bookmark = false;
       let user_option = {};
       if (this.kanji_level.toString()) {
         user_option.kanji_level = this.kanji_level.toString();
         user_option.kanji_quantity = 100;
+        // jus_bookmark = true;
       }
       if (this.grammar_level.toString()) {
         user_option.grammar_level = this.grammar_level.toString();
         user_option.grammar_quantity = 100;
+        // jus_bookmark = true;
       }
       if (this.word_level.toString()) {
         user_option.word_level = this.word_level.toString();
         user_option.word_quantity = 100;
+        // jus_bookmark = true;
       }
       user_option.card_show = this.detail_show;
       user_option.bookmark_show = this.bookmark_show;
+      // user_option.just_bookmark = just_bookmark;
 
       localStorage.setItem("user_option", JSON.stringify(user_option));
       // this.$store.dispatch("setUserOption", user_option);
       //get list random
-      await this.$axios
-        .get("/get_random_list", {
-          params: user_option,
-        })
-        .then((response) => {
-          this.loading = false;
-          //push data to vuex and local storage
-          // this.$store.dispatch("setRandomList", response.data);
-          //push to local storage
-          const random_list = JSON.stringify(response.data);
+      // if(jus_bookmark) {
+        await this.$axios
+          .get("", {
+            params: user_option,
+          })
+          .then((response) => {
+            this.loading = false;
+            //push data to vuex and local storage
+            // this.$store.dispatch("setRandomList", response.data);
+            //push to local storage
+            const random_list = JSON.stringify(response.data);
 
-          localStorage.setItem("random_list", random_list);
-        });
+            localStorage.setItem("random_list", random_list);
+          });
+      // }
       this.cancelOption();
     },
     cancelOption() {

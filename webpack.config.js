@@ -5,7 +5,7 @@ const CopyPlugin = require('copy-webpack-plugin');
 const ExtensionReloader = require('webpack-extension-reloader');
 const { VueLoaderPlugin } = require('vue-loader');
 const { version } = require('./package.json');
-// const VuetifyLoaderPlugin = require('vuetify-loader/lib/plugin');
+const path = require('path');
 const { VuetifyLoaderPlugin } = require('vuetify-loader')
 
 const config = {

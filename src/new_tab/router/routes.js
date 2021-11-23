@@ -1,5 +1,5 @@
 import Setting from './pages/components/Setting'
-import Content from './pages/components/Content'
+import Card from './pages/components/Card'
 import Bookmark from './pages/components/Bookmark'
 
 
@@ -7,7 +7,7 @@ import Bookmark from './pages/components/Bookmark'
 export default [
   {
     path: '/',
-    component: Content,
+    component: Card,
     name: 'index'
   },
   {

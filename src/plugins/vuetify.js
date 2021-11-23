@@ -15,7 +15,10 @@ const opts = {
             setting: 'fas fa-cog',
             user: 'fas fa-user',
             chevron_up: 'fas fa-chevron-up',
-            chevron_down: 'fas fa-chevron-down'
+            chevron_down: 'fas fa-chevron-down',
+            remove: 'fas fa-trash',
+            expand: 'fas fa-angle-down',
+            home: 'fas fa-home'
         },
     },
 }

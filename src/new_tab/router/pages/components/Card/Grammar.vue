@@ -42,26 +42,9 @@
 
     <v-card-actions>
       <div class="anim-icon anim-icon-md bookmark">
-        <input type="checkbox" id="bookmark" @click="saveBookmark()" />
+        <input type="checkbox" id="bookmark" @click="saveBookmark()" v-model="bookmark_flg" />
         <label for="bookmark"></label>
       </div>
-      <!-- <div class="share">
-        <span>Share</span>
-        <nav>
-          <a href="#">
-            <i class="fa fa-twitter"></i>
-          </a>
-          <a href="#">
-            <i class="fa fa-facebook"></i>
-          </a>
-          <a href="#">
-            <i class="fa fa-google"></i>
-          </a>
-          <a href="#">
-            <i class="fa fa-github"></i>
-          </a>
-        </nav>
-      </div> -->
 
       <v-spacer></v-spacer>
 
@@ -87,6 +70,9 @@ export default {
     tag_color: {
       type: String,
     },
+    bookmark_flg: {
+      type: Boolean
+    }
   },
   data: function () {
     return {

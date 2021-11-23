@@ -1,35 +1,37 @@
 <template>
-  <v-container fluid class="mt-2">
-    <v-row align="center" justify="center">
-      <v-col cols="5">
-        <WordCard
-          v-if="type ==0"
-          :card_show="user_option.card_show"
-          :data="random_data"
-          :tag_color="randomColor"
-          :bookmark_flag="bookmark_flg"
-          @saveBookmark="saveBookmark"
-        />
-        <GrammarCard
-          v-if="type ==1"
-          :card_show="user_option.card_show"
-          :data="random_data"
-          :tag_color="randomColor"
-          :bookmark_flag="bookmark_flg"
-          @saveBookmark="saveBookmark"
-        />
-        <KanjiCard
-          v-if="type ==2"
-          :card_show="user_option.card_show"
-          :data="random_data"
-          :tag_color="randomColor"
-          :bookmark_flag="bookmark_flg"
-          @saveBookmark="saveBookmark"
-          @removeBookmark = "removeBookmark"
-        />
-      </v-col>
-    </v-row>
-  </v-container>
+  <v-main>
+    <v-container fluid class="mt-2">
+      <v-row align="center" justify="center">
+        <v-col cols="5">
+          <WordCard
+            v-if="type == 0"
+            :card_show="user_option.card_show"
+            :data="random_data"
+            :tag_color="randomColor"
+            :bookmark_flag="bookmark_flg"
+            @saveBookmark="saveBookmark"
+          />
+          <GrammarCard
+            v-if="type == 1"
+            :card_show="user_option.card_show"
+            :data="random_data"
+            :tag_color="randomColor"
+            :bookmark_flag="bookmark_flg"
+            @saveBookmark="saveBookmark"
+          />
+          <KanjiCard
+            v-if="type == 2"
+            :card_show="user_option.card_show"
+            :data="random_data"
+            :tag_color="randomColor"
+            :bookmark_flag="bookmark_flg"
+            @saveBookmark="saveBookmark"
+            @removeBookmark="removeBookmark"
+          />
+        </v-col>
+      </v-row>
+    </v-container>
+  </v-main>
 </template>
 
 <script>
@@ -78,7 +80,7 @@ export default {
         word_level: "3,4",
         word_quantity: "100",
         card_show: true,
-        bookmark_show: false
+        bookmark_show: false,
       };
       localStorage.setItem("user_option", JSON.stringify(this.user_option));
       // this.$store.dispatch("setUserOption", this.user_option);
@@ -90,7 +92,7 @@ export default {
     if (!local_random_list) {
       //get list random
       await this.$axios
-        .get("/get_random_list", {
+        .get("", {
           params: this.user_option,
         })
         .then((response) => {
@@ -106,11 +108,10 @@ export default {
       if (this.countRandomList()) {
         // user_option = this.$store.getters.user_option;
         await this.$axios
-          .get("/get_random_list", {
+          .get("", {
             params: this.user_option,
           })
           .then((response) => {
-            console.log(response);
             // this.$store.dispatch("setRandomList", response.data);
             //push to local storage
             const random_list = JSON.stringify(response.data);
@@ -124,7 +125,6 @@ export default {
     }
     let randomValue = Math.floor(Math.random() * this.colorList.length);
     this.randomColor = this.colorList[randomValue];
-
   },
   methods: {
     countRandomList() {
@@ -142,7 +142,7 @@ export default {
       type = 1: grammar
       type = 2: kanji
         */
-      let bookmark = JSON.parse(localStorage.getItem("bookmark"))
+      let bookmark = JSON.parse(localStorage.getItem("bookmark"));
       data = JSON.parse(data);
       let ratio_arr = [];
       if (data.word_datas.length > 0) {
@@ -171,21 +171,21 @@ export default {
         return_data = data.kanji_datas[0];
         data.kanji_datas.shift();
       }
-      if(this.type == 3) {
-        this.bookmark_flg = true
-        return_data = (bookmark[Math.floor(Math.random() * bookmark.length)])
-        switch(return_data.type) {
+      if (this.type == 3) {
+        this.bookmark_flg = true;
+        return_data = bookmark[Math.floor(Math.random() * bookmark.length)];
+        switch (return_data.type) {
           case 0: {
-            this.type = 0
-            break
+            this.type = 0;
+            break;
           }
           case 1: {
-            this.type = 1
-            break
+            this.type = 1;
+            break;
           }
           case 2: {
-            this.type = 2
-            break
+            this.type = 2;
+            break;
           }
         }
       }
@@ -196,13 +196,12 @@ export default {
     },
     saveBookmark(value) {
       let bookmark = localStorage.getItem("bookmark");
-      this.random_data.type = value
+      this.random_data.type = value;
       let temp = [];
       if (bookmark) {
         temp = JSON.parse(bookmark);
         temp.push(this.random_data);
         // chrome.storage.sync.get(["value"], function (result) {
-        //   console.log(result);
         // });
       } else {
         temp.push(this.random_data);
@@ -214,10 +213,17 @@ export default {
     },
     removeBookmark(value) {
       let bookmark = localStorage.getItem("bookmark");
-      var temp = JSON.parse(bookmark).filter(function(el) { return el.id != value.id }); 
+      var temp = JSON.parse(bookmark).filter(function (el) {
+        return el.id != value.id;
+      });
       localStorage.setItem("bookmark", JSON.stringify(temp));
-
-    }
+    },
   },
 };
 </script>
+
+<style>
+#create .v-speed-dial {
+  position: fixed;
+}
+</style>

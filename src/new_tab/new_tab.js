@@ -4,7 +4,7 @@ import router from './router'
 import vuetify from '../plugins/vuetify'
 import axios from 'axios'
 Vue.prototype.$axios = axios
-axios.defaults.baseURL = "http://3.115.11.74/api";
+axios.defaults.baseURL = "https://tokui-api.herokuapp.com/";
 
 /* eslint-disable no-new */
 new Vue({
